@@ -2,7 +2,7 @@ package com.laibao.micro.container;
 
 import com.laibao.micro.container.annotation.SPI;
 import com.laibao.micro.container.utils.Holder;
-import com.laibao.micro.container.utils.StringUtils;
+import com.laibao.micro.container.helper.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static com.laibao.micro.container.constants.CommonConstants.*;
-import static com.laibao.micro.container.utils.ExtensionHelper.*;
+import static com.laibao.micro.container.helper.ExtensionHelper.*;
 
 /**
  * 加载和管理扩展。
@@ -58,14 +58,14 @@ public class ExtensionLoader<T> {
 
 
     public T getExtension(String name) {
-        if (StringUtils.isEmpty(name)){
+        if (StringHelper.isEmpty(name)){
             throw new IllegalArgumentException("Extension name == null");
         }
         return getExtension(name, new HashMap<>(), new ArrayList<>());
     }
 
     public T getExtension(String name, Map<String, String> properties) {
-        if (StringUtils.isEmpty(name)){
+        if (StringHelper.isEmpty(name)){
             throw new IllegalArgumentException("Extension name == null");
         }
         return getExtension(name, properties, new ArrayList<>());
@@ -73,7 +73,7 @@ public class ExtensionLoader<T> {
 
     public T getExtension(Map<String, String> properties) {
         String name = properties.get(type.getName());
-        if (StringUtils.isEmpty(name)) {
+        if (StringHelper.isEmpty(name)) {
             name = defaultExtension;
         }
         return getExtension(name, properties, new ArrayList<String>());
@@ -87,7 +87,7 @@ public class ExtensionLoader<T> {
     }
 
     public T getExtension(String name, Map<String, String> properties, List<String> wrappers) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringHelper.isEmpty(name)) {
             throw new IllegalArgumentException("Extension name == null");
         }
         T extension = createExtension(name, properties);
@@ -338,7 +338,7 @@ public class ExtensionLoader<T> {
                 buf.append(") ");
                 buf.append(entry.getKey());
                 buf.append(":\r\n");
-                buf.append(StringUtils.toString(entry.getValue()));
+                buf.append(StringHelper.toString(entry.getValue()));
             }
         }
         return new IllegalStateException(buf.toString());

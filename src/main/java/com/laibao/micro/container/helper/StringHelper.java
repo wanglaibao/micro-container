@@ -1,13 +1,13 @@
-package com.laibao.micro.container.utils;
+package com.laibao.micro.container.helper;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * StringUtils
+ * StringHelper
  * @since 1.0
  */
-public interface StringUtils {
+public interface StringHelper {
 
     /**
      * Get the String of Throwable, like the output of {@link Throwable#printStackTrace()}.
